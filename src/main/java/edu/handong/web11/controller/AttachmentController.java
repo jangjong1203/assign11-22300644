@@ -35,4 +35,21 @@ public class AttachmentController {
             .body(resource);
     }
     // STUDENT TODO: GET /attachments/{id}/view (image preview).
+
+    @GetMapping("/{id}/view")
+    public ResponseEntity<Resource> view(@PathVariable Long id){
+        //URL로 넘어온 id를 통해 DB에서 정보를 찾고, 없으면 에러를 발생시킴
+        Attachment file = attachments.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "첨부파일이 없습니다."));
+        //파일 타입을 검사해서 image/로 시작하는 파일 형식이 아니면 미리보기를 사용할수없도록 막습니다.
+        String contentType = file.getContentType();
+        if (!contentType.startsWith("image/")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "이미지 파일만 미리보기가 가능합니다.");
+        }
+        // 파일의 실제 타입도 받아와서 img파일은 화면에 렌더링 시켜준다.
+        Resource resource = storage.load(file);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .body(resource);
+    }
 }
