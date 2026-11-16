@@ -20,6 +20,8 @@
             <ul class="list-group" th:if="${!#lists.isEmpty(post.attachments)}">
                 <li class="list-group-item d-flex justify-content-between align-items-center"
                     th:each="file : ${post.attachments}">
+                    <span class="ms-2 text-secondary"
+                      th:text="${file.contentType}"></span>
                     <div><strong th:text="${file.originalFilename}">sample.pdf</strong><small
                             class="ms-2 text-secondary" th:text="${file.fileSize / 1024} + ' KB'">크기</small></div>
                     <a class="btn btn-outline-primary btn-sm" th:href="@{/attachments/{id}/download(id=${file.id})}">다운로드</a>

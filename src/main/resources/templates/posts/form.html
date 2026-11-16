@@ -23,11 +23,11 @@
                                                                                          type="file" name="files"
                                                                                          multiple
                                                                                          accept=".jpg,.jpeg,.png,.gif,.pdf,.txt">
-            <div class="form-text">JPG, PNG, GIF, PDF, TXT · 각 파일 최대 10MB</div>
+            <div class="form-text">JPG, PNG, GIF, PDF, TXT 만 가능합니다. 파일 최대크기는 10MB 입니다.</div>
         </div>
         <div th:if="${postId != null}" class="form-text mt-3">수정에서는 제목과 본문만 변경합니다.</div>
         <div class="mt-4">
-            <button type="submit" class="btn btn-primary">저장</button>
+            <button type="submit" class="btn btn-primary">등록하기</button>
         </div>
     </form>
 </main>

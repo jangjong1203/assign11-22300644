@@ -11,9 +11,9 @@
 <main class="container py-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <div class="eyebrow">WEEK 11 · SPRING BOOT</div>
+            <div class="eyebrow">WEB SERVICE게시판</div>
             <h1>자료 공유 게시판</h1></div>
-        <a class="btn btn-primary" th:href="@{/posts/new}">+ 게시글 작성</a></div>
+        <a class="btn btn-primary" th:href="@{/posts/new}">새 자료 작성</a></div>
     <div class="card shadow-sm">
         <div class="card-body p-0">
             <table class="table table-hover mb-0 align-middle">
@@ -33,7 +33,7 @@
                     <td th:text="${#temporals.format(p.createdAt,'yyyy-MM-dd HH:mm')}">날짜</td>
                 </tr>
                 <tr th:if="${#lists.isEmpty(posts)}">
-                    <td colspan="4" class="text-center text-secondary p-5">첫 게시글을 작성해 보세요.</td>
+                    <td colspan="4" class="text-center text-secondary p-5">등록된 자료가 없습니다.</td>
                 </tr>
                 </tbody>
             </table>
