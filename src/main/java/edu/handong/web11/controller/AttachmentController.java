@@ -19,12 +19,16 @@ public class AttachmentController {
     }
     @GetMapping("/{id}/download")
     public ResponseEntity<Resource> download(@PathVariable Long id) {
+        //URL로 넘어온 id를 통해 DB에서 정보를 찾고, 없으면 에러를 발생시킴
         Attachment file = attachments.findById(id).orElseThrow(() ->
             new ResponseStatusException(HttpStatus.NOT_FOUND, "첨부파일이 없습니다."));
+        //파일정보를 이용해 서버에서 파일을 가져옴
         Resource resource = storage.load(file);
+        //브라우저가 파일을 다운로드하게 만듬
         String disposition = ContentDisposition.attachment()
             .filename(file.getOriginalFilename(), StandardCharsets.UTF_8)
             .build().toString();
+        //다운로드 헤더, 타입, 파일의 데이터들을 반환해서 요청에 응답함
         return ResponseEntity.ok()
             .contentType(MediaType.APPLICATION_OCTET_STREAM)
             .header(HttpHeaders.CONTENT_DISPOSITION, disposition)
